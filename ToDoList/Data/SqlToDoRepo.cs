@@ -25,21 +25,6 @@ namespace ToDoList.Data
             return _context.ToDoItems.ToList();
         }
 
-        public void UpdateToDo(ToDoItem toDo)
-        {
-            //No code here
-            //_context.ToDoItems.Update(toDo);
-
-
-            var toDoItem = GetToDoItemById(toDo.Id);
-
-            if (toDoItem != null)
-            {
-                toDoItem.Text = toDo.Text;
-                toDoItem.Completed = toDo.Completed;
-            }
-        }
-
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);

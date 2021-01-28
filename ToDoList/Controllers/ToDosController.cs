@@ -16,10 +16,12 @@ namespace ToDoList.Controllers
     public class ToDosController : ControllerBase
     {
         private readonly IToDoRepo _repository;
+        private readonly IMapper _mapper;
 
-        public ToDosController(IToDoRepo repository)
+        public ToDosController(IToDoRepo repository,IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -31,9 +33,11 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateToDoItem(ToDoItem toDoItem)
+        public ActionResult CreateToDoItem
+            (ToDoCreateDto toDoCreateDto)
         {
-            _repository.AddToDo(toDoItem);
+            var toDoItemToModel = _mapper.Map<ToDoItem>(toDoCreateDto);
+            _repository.AddToDo(toDoItemToModel);
             _repository.SaveChanges();
 
             return Ok();

@@ -10,7 +10,6 @@ namespace ToDoList.Data
     {
         IEnumerable<ToDoItem> GetAllItems();
         void AddToDo(ToDoItem toDo);
-        void UpdateToDo(ToDoItem toDo);//Update text once and completed
         ToDoItem GetToDoItemById(Guid id);
         bool SaveChanges();
     }
