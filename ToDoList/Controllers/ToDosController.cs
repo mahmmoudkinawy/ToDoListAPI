@@ -13,23 +13,23 @@ namespace ToDoList.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ToDoController : ControllerBase
+    public class ToDosController : ControllerBase
     {
         private readonly IToDoRepo _repository;
         private readonly IMapper _mapper;
 
-        public ToDoController(IToDoRepo repository, IMapper mapper)
+        public ToDosController(IToDoRepo repository,IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ToDoReadDto>> GetAll()
+        public ActionResult<IEnumerable<ToDoItem>> GetAll()
         {
             var toDoItemsFromRepo = _repository.GetAllItems();
 
-            return Ok(_mapper.Map<IEnumerable<ToDoReadDto>>(toDoItemsFromRepo));
+            return Ok(toDoItemsFromRepo);
         }
 
         [HttpPost]
@@ -44,16 +44,16 @@ namespace ToDoList.Controllers
         }
 
         //Update to do text only 
-        
-        [HttpPut("updateText/{id}")]
-        public ActionResult UpdateToDoItemText(Guid id ,
+
+        [HttpPost("{id}/change-text")]
+        public ActionResult UpdateToDoItemText(Guid id,
             ToDoUpdateTextDto toDoUpdateTextDto)
         {
             var toDoItemFromRepo = _repository.GetToDoItemById(id);
             if (toDoItemFromRepo == null) return NotFound();
 
-            _mapper.Map(toDoUpdateTextDto, toDoItemFromRepo);
-            _repository.UpdateToDo(toDoItemFromRepo);
+            toDoItemFromRepo.Text = toDoUpdateTextDto.Text;
+
             _repository.SaveChanges();
 
             return NoContent();
@@ -61,19 +61,17 @@ namespace ToDoList.Controllers
 
         //Update to do complated only
 
-        [HttpPut("updateComplate/{id}")]
-        public ActionResult UpdateToDoItemComplete(Guid id,
-            ToDoUpdateCompleteDto toDoUpdateCompleteDto)
+        [HttpPost("{id}/complete")]
+        public ActionResult UpdateToDoItemComplete(Guid id)
         {
             var toDoItemFromRepo = _repository.GetToDoItemById(id);
             if (toDoItemFromRepo == null) return NotFound();
 
-            _mapper.Map(toDoUpdateCompleteDto, toDoItemFromRepo);
-            _repository.UpdateToDo(toDoItemFromRepo);
+            toDoItemFromRepo.Completed = true;
+
             _repository.SaveChanges();
 
             return NoContent();
         }
-
     }
 }

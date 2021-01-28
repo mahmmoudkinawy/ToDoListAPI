@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,11 +25,6 @@ namespace ToDoList.Data
             return _context.ToDoItems.ToList();
         }
 
-        public void UpdateToDo(ToDoItem toDo)
-        {
-            //No code here
-        }
-
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
@@ -36,7 +32,7 @@ namespace ToDoList.Data
 
         public ToDoItem GetToDoItemById(Guid id)
         {
-            return _context.ToDoItems.FirstOrDefault(kh => kh.Id == id);
+            return _context.ToDoItems.Find(id);
         }
     }
 }

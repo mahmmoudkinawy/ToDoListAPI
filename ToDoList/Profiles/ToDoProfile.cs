@@ -10,8 +10,7 @@ namespace ToDoList.Profiles
         {
             CreateMap<ToDoItem, ToDoReadDto>();
             CreateMap<ToDoCreateDto, ToDoItem>();
-            CreateMap<ToDoUpdateTextDto, ToDoItem>();
-            CreateMap<ToDoUpdateCompleteDto, ToDoItem>();
+
         }
     }
 }
