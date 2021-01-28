@@ -31,14 +31,13 @@ namespace ToDoList.Data
             //_context.ToDoItems.Update(toDo);
 
 
-            var toDoItem = _context.ToDoItems.SingleOrDefault(kh => kh.Id == toDo.Id);
+            var toDoItem = GetToDoItemById(toDo.Id);
 
             if (toDoItem != null)
             {
                 toDoItem.Text = toDo.Text;
                 toDoItem.Completed = toDo.Completed;
             }
-
         }
 
         public bool SaveChanges()
