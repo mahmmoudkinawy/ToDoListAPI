@@ -33,8 +33,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateToDoItem
-            (ToDoCreateDto toDoCreateDto)
+        public ActionResult CreateToDoItem(ToDoCreateDto toDoCreateDto)
         {
             var toDoItemToModel = _mapper.Map<ToDoItem>(toDoCreateDto);
             _repository.AddToDo(toDoItemToModel);
@@ -44,9 +43,9 @@ namespace ToDoList.Controllers
         }
 
         //Update to do text only 
-        
-        [HttpPut("updateText/{id}")]
-        public ActionResult UpdateToDoItemText(Guid id ,
+
+        [HttpPost("changeText/{id}")]
+        public ActionResult UpdateToDoItemText(Guid id,
             ToDoUpdateTextDto toDoUpdateTextDto)
         {
             var toDoItemFromRepo = _repository.GetToDoItemById(id);
@@ -61,12 +60,13 @@ namespace ToDoList.Controllers
 
         //Update to do complated only
 
-        [HttpPut("updateComplate/{id}")]
-        public ActionResult UpdateToDoItemComplete(Guid id,
-            ToDoUpdateCompleteDto toDoUpdateCompleteDto)
+        [HttpPost("changeTheStatus/{id}")]
+        public ActionResult UpdateToDoItemComplete(Guid id)
         {
             var toDoItemFromRepo = _repository.GetToDoItemById(id);
             if (toDoItemFromRepo == null) return NotFound();
+
+            var toDoUpdateCompleteDto = new ToDoUpdateCompleteDto();
 
             _mapper.Map(toDoUpdateCompleteDto, toDoItemFromRepo);
             _repository.UpdateToDo(toDoItemFromRepo);
@@ -74,6 +74,5 @@ namespace ToDoList.Controllers
 
             return NoContent();
         }
-
     }
 }

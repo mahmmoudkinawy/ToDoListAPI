@@ -12,7 +12,6 @@ namespace ToDoList.DTOs
         [StringLength(500)]
         public string Text { get; set; }
 
-        [Required]
         public bool Completed { get; set; } = false;
     }
 }
