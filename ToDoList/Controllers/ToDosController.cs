@@ -13,17 +13,17 @@ namespace ToDoList.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ToDoController : ControllerBase
+    public class ToDosController : ControllerBase
     {
         private readonly IToDoRepo _repository;
 
-        public ToDoController(IToDoRepo repository)
+        public ToDosController(IToDoRepo repository)
         {
             _repository = repository;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ToDoReadDto>> GetAll()
+        public ActionResult<IEnumerable<ToDoItem>> GetAll()
         {
             var toDoItemsFromRepo = _repository.GetAllItems();
 
