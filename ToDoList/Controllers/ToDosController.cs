@@ -18,10 +18,12 @@ namespace ToDoList.Controllers
         private readonly IToDoRepo _repository;
         private readonly IMapper _mapper;
 
-        public ToDosController(IToDoRepo repository,IMapper mapper)
+        public ToDosController(IToDoRepo repository, IMapper mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
+            _repository = repository ??
+                throw new ArgumentNullException(nameof(repository));
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]

@@ -13,7 +13,8 @@ namespace ToDoList.Data
 
         public SqlToDoRepo(ToDoDbContext context)
         {
-            _context = context;
+            _context = context ??
+                throw new ArgumentNullException(nameof(context));
         }
         public void AddToDo(ToDoItem toDo)
         {
