@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ToDoList.Data;
 using ToDoList.Models;
 using AutoMapper;
 using ToDoList.DTOs;
-using Microsoft.AspNetCore.Http;
+using ToDoList.Attributes;
 
 namespace ToDoList.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ToDoAuthorize]
     public class ToDosController : ControllerBase
     {
         private readonly IToDoRepo _repository;
