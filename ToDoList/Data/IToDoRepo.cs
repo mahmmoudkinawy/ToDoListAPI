@@ -9,6 +9,7 @@ namespace ToDoList.Data
     public interface IToDoRepo
     {
         IEnumerable<ToDoItem> GetAllItems();
+        IEnumerable<ToDoItem> GetUnCompletedToDos();
         void AddToDo(ToDoItem toDo);
         ToDoItem GetToDoItemById(Guid id);
         bool SaveChanges();

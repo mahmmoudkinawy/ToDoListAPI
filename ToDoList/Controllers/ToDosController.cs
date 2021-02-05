@@ -28,7 +28,7 @@ namespace ToDoList.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ToDoItem>> GetAll()
         {
-            var toDoItemsFromRepo = _repository.GetAllItems();
+            var toDoItemsFromRepo = _repository.GetUnCompletedToDos();
 
             return Ok(toDoItemsFromRepo);
         }

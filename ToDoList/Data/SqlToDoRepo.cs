@@ -35,5 +35,12 @@ namespace ToDoList.Data
         {
             return _context.ToDoItems.Find(id);
         }
+
+        public IEnumerable<ToDoItem> GetUnCompletedToDos()
+        {
+            return from r in _context.ToDoItems
+                   where r.Completed != true
+                   select r;
+        }
     }
 }
