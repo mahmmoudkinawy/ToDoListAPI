@@ -17,5 +17,8 @@ namespace ToDoList.Models
 
         [Required]
         public bool Completed { get; set; } = false;
+
+        [Required]
+        public Guid UserId { get; set; }
     }
 }

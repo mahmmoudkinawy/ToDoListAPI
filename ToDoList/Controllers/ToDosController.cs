@@ -28,14 +28,14 @@ namespace ToDoList.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ToDoItem>> GetAll()
         {
-            var toDoItemsFromRepo = _repository.GetUnCompletedToDos();
+            var userId = Guid.Parse(HttpContext.Items["UserId"].ToString());
+            var toDoItemsFromRepo = _repository.GetUnCompletedToDos(userId);
 
             return Ok(toDoItemsFromRepo);
         }
 
         [HttpPost]
-        public ActionResult CreateToDoItem
-            (ToDoCreateDto toDoCreateDto)
+        public ActionResult CreateToDoItem(ToDoCreateDto toDoCreateDto)
         {
             var toDoItemToModel = _mapper.Map<ToDoItem>(toDoCreateDto);
             _repository.AddToDo(toDoItemToModel);
@@ -47,8 +47,7 @@ namespace ToDoList.Controllers
         //Update to do text only 
 
         [HttpPost("{id}/change-text")]
-        public ActionResult UpdateToDoItemText(Guid id,
-            ToDoUpdateTextDto toDoUpdateTextDto)
+        public ActionResult UpdateToDoItemText(Guid id, ToDoUpdateTextDto toDoUpdateTextDto)
         {
             var toDoItemFromRepo = _repository.GetToDoItemById(id);
             if (toDoItemFromRepo == null) return NotFound();

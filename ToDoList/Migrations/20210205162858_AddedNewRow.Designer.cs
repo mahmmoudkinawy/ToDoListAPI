@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoList.Data;
 
 namespace ToDoList.Migrations
 {
     [DbContext(typeof(ToDoDbContext))]
-    partial class ToDoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210205162858_AddedNewRow")]
+    partial class AddedNewRow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,28 +48,28 @@ namespace ToDoList.Migrations
                             Id = new Guid("d28888e9-2ba9-473a-a40f-e38cb54f9b35"),
                             Completed = true,
                             Text = "Playing football",
-                            UserId = new Guid("821113c2-e93f-42b3-b392-0e09f5ac89b0")
+                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             Id = new Guid("da2fd609-d754-4feb-8acd-c4f9ff13ba96"),
                             Completed = true,
                             Text = "Watching TV",
-                            UserId = new Guid("13f1612b-11e5-4af3-aaa2-fef6f992f36d")
+                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             Id = new Guid("2902b665-1190-4c70-9915-b9c2d7680450"),
                             Completed = false,
                             Text = "Swimming",
-                            UserId = new Guid("559f6897-fdc0-4270-abc4-6d9e578fbcba")
+                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             Id = new Guid("102b566b-ba1f-404c-b2df-e2cde39ade09"),
                             Completed = false,
                             Text = "Traveling abroad",
-                            UserId = new Guid("82cc16b8-b18f-4287-855d-a4e50f181e67")
+                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
 #pragma warning restore 612, 618
